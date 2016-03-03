@@ -1,0 +1,268 @@
+/*INCLUDE FONTS */
+@font-face {
+  font-family: Roboto;
+  src: url('../fonts/Roboto-Regular.ttf');
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background: #FAFAFA;
+}
+
+html,
+body {
+  padding: 0px;
+  margin: 0px;
+}
+
+
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background: #FAFAFA;
+}
+
+header, footer, nav {
+  /*max-width: 1140px;*/
+  margin-top: 0px;
+  margin: auto;
+  background: white;
+  box-shadow: 0px 0px 2px black;
+}
+
+/*header*/
+header {
+
+  margin-top: 0px;
+  background: #33363B;
+  min-height: auto !important;
+  height: 140px;
+}
+
+header h1 {
+  padding: 20px;
+  color: white;
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+}
+
+header a {
+  text-decoration: none;
+}
+
+header p {
+  padding: 20px;
+  padding-top: 0px;
+  margin-top: 0px;
+  color: white;
+}
+
+/*Navigation Bar*/
+#menu-btn {
+  background: #33363B;
+  color: white;
+  text-align: center;
+  margin: 0px;
+  height: 32px;
+  padding-top: 10px;
+  display: none;
+}
+nav {
+  background: #33363B;
+  height: 40px;
+}
+nav.visible {
+  display: block;
+}
+
+nav li {
+  display: inline;
+}
+
+nav ul {
+  list-style-type: none;
+  padding-top: 10px;
+  padding-left: 0px;
+  margin: 0px;
+}
+
+
+nav li a, nav li a:focus{
+  color: white;
+  text-decoration: none;
+  padding: 10px;
+}
+
+nav li a:hover{
+  background: white;
+  color: black;
+}
+
+/*Admin Panel*/
+.admin-panel {
+  background: #33363B;
+  color: white;
+  text-align: right;
+  margin-top: 5px;
+}
+
+/*Components*/
+.table-custom {
+  max-width: 640px;
+  margin: auto;
+  text-align: justify;
+}
+.table {
+  margin-top: 20px;
+}
+.table-custom > tbody > tr > td{
+  /*border: 0px;*/
+}
+.custom-btn {
+  background: #33363B;
+  border: 0px;
+  border-radius: 0px;
+  margin: 5px;
+}
+
+.custom-btn:hover {
+  background: black;
+}
+
+table .custom-btn {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.pagination li a{
+  color: #33363B;
+}
+.pagination li a:hover{
+  color: black;
+}
+.pagination > .active > span {
+  background: #33363B;
+  border-color: #33363B;
+}
+.pagination > .active > span:hover {
+  background: black;
+  border-color: black;
+}
+.form-control {
+  max-width: 300px;
+  margin: auto;
+}
+input[type="text"] {
+  border-radius: 0;
+}
+
+/*Changing News Letter Entry Color*/
+td a:hover{
+  color: black;
+}
+/*footer*/
+footer {
+  color: white;
+  text-align: center;
+  height: 40px;
+  padding-top: 12px;
+  background: #33363B;
+  font-size: 14px;
+  margin-top: 20px;
+}
+
+main {
+  margin: auto;
+  background: white;
+  text-align: center;
+  padding-top: 20px;
+}
+
+/* Post Style */
+.post-entry {
+  text-align: left;
+}
+.post-entry h2 {
+  margin-top: 0px;
+}
+/*date, category and comment count*/
+.post-entry .post-info {
+  margin-bottom: 20px;
+  text-align: right;
+}
+/*post-body*/
+.post-content {
+  font-size: 17px;
+  text-align: justify;
+  font-weight: 50;
+  line-height: 30px;;
+}
+blockquote {
+  margin: 20px 0 20px 0;
+  background: #eee;
+  border: 0;
+  font-size: 16px;
+}
+.post-form .form-control {
+  max-width:  720px;
+}
+/*Comments*/
+.comment-message {
+  margin-top: 10px;
+}
+
+/*Post thumb nail*/
+
+.post-thumbnail h3 {
+  text-align: left;
+  font-size: 22px;
+}
+h3 a {
+  color: #33363B
+}
+h3 a:hover {
+  color: black;
+  text-decoration: none;
+}
+.post-text {
+  text-align: justify;
+}
+/*Responsive Design*/
+@media (max-width: 460px) {
+
+  header {
+    text-align: center;
+    height: auto;
+    padding: 0px;
+    margin: 0px;
+  }
+
+  #menu-btn {
+    display: block;
+  }
+
+  nav {
+    height: auto;
+    text-align: center;
+    display: none;
+  }
+
+  nav ul {
+    width: 100%;
+  }
+  nav li {
+    width: 100%;
+    display: block;
+  }
+
+  nav li a {
+    display: block;
+  }
+
+}
+
+@media (max-width: 300px) {
+  header h1 {
+    font-size: 20px;
+  }
+}

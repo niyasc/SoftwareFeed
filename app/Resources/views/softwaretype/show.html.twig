@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+    <h2>{{ softwareType.name }}</h2>
+     <!-- TWIG MACRO -->
+    {% macro getparent1(node) %}
+    {% import _self as macros %}
+        {% if node %}
+            {% if node.parent %}
+                    {{ macros.getparent1(node.parent) }}
+            {% endif %}
+            <a href="{{ path('softwaretype_show', {'id' : node.id}) }}">{{node.name}}</a> &gt; 
+        {% endif %}
+    {% endmacro %}
+    {% import _self as macros %}{{ macros.getparent1(softwareType.parent) }}
+    
+    <!-- MACRO END -->
+    <hr>
+    <div class="row">
+        <div class="col-md-8 col-md-push-2 well">
+            {{ softwareType.description }}
+        </div>
+    </div>
+   
+    
+    
+    <ul>
+        <li>
+            <a href="{{ path('softwaretype_index') }}">All Categories</a>
+        </li>
+        <li>
+            <a href="{{ path('softwaretype_edit', { 'id': softwareType.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

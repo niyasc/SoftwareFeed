@@ -1,13 +1,76 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
+<head>
+  <meta charset="UTF-8" />
+  <title>{% block title %}SoftwareWatch - Keep your eyes on software releases{% endblock %}</title>
+  {% block stylesheets %}
+  <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}" />
+  <link rel="stylesheet" href="{{ asset('css/bootstrap-theme.min.css') }}" />
+  <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
+
+  {% endblock %}
+  <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+</head>
+<body class="container-fluid">
+  {% block body %}
+  {% block header %}
+  <header>
+    <a href="{{ path('homepage') }}">
+      <h1>SoftwareWatch</h1>
+    </a>
+    <p>
+      Keep your eyes on software releases
+    </p>
+  </header>
+  <div id="menu-btn">
+    &#9776; MENU
+  </div>
+  <nav>
+    <ul>
+      <li><a href="{{ path('homepage') }}">Home</a></li>
+      <li><a href="#">Review</a></li>
+      <li><a href="#">News</a></li>
+      <li><a href="#">Tutorials</a></li>
+      <li><a href="#">News Letter</a></li>
+      <li><a href="{{ path('softwaretype_index') }}">Software Categories</a></li>
+      <li><a href="#">About</a></li>
+    </ul>
+  </nav>
+  {% endblock %}
+  {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+  <div class="admin-panel">
+    Hi, {{ app.user.username }}
+    <a class="btn btn-sm btn-primary custom-btn" href="{{ path('logout', {'target_url': app.request.uri})  }}">Logout</a>
+  </div>
+  {% endif %}
+
+  <main>
+    {% block main %}
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-8">
+          <div class="content">
+            {% block content %}
+            {% endblock %}
+          </div>
+        </div>
+        <div class="col-md-4">
+          Sidebar
+        </div>
+      </div>
+    </div>
+  {% endblock %} <!-- End of Main -->
+</main>
+
+{% block footer %}
+<footer>
+  &copy; SoftwareWatcher 2016
+</footer>
+{% endblock %}
+{% endblock %}
+{% block javascripts %}
+<script type="text/javascript" src="{{ asset('js/jquery.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/script.js') }}"></script>
+{% endblock %}
+</body>
 </html>

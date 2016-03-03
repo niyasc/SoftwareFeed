@@ -1,3 +1,8 @@
+software_watch:
+    resource: "@SoftwareWatchBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation

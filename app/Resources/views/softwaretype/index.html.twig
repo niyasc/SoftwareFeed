@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+    <h2>Software Types</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for softwareType in softwareTypes %}
+            <tr>
+                <td><a href="{{ path('softwaretype_show', { 'id': softwareType.id }) }}">{{ softwareType.id }}</a></td>
+                <td>{{ softwareType.name }}</td>
+                <td>{{ softwareType.description }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('softwaretype_show', { 'id': softwareType.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('softwaretype_edit', { 'id': softwareType.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('softwaretype_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}
