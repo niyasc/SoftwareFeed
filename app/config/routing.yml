@@ -1,5 +1,5 @@
 software_watch:
-    resource: "@SoftwareWatchBundle/Controller/"
+    resource: "@SoftwareFeedBundle/Controller/"
     type:     annotation
     prefix:   /
 

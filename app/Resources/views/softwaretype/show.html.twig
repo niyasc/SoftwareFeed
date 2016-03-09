@@ -23,9 +23,26 @@
     {{form_end(delete_form)}}
     <hr>
     <div class="row">
-        <div class="col-md-8 col-md-push-2 well">
-            {{ softwareType.description }}
-        </div>
+        <div class="col-md-8 col-md-push-2">
+			<div class="well">
+			
+            	<strong>{{ softwareType.description }}</strong>
+			</div>
+       
+			{% if softwareType.subtypes | length > 0 %}
+				<h3>Categories under {{softwareType.name}}</h3>
+		 		<table class="table table-bordered">
+        			{% for softwareType in softwareType.subtypes %}
+            		<tr>
+                		<td>{{loop.index}}</td>
+                		<td class="text-left"><a class="btn" href="{{ path('softwaretype_show', { 'id': softwareType.id }) }}">{{ softwareType.name }}</a></td>
+                		<td class="text-left">
+                    		<a class="btn btn-default btn-sm" href="{{ path('softwaretype_edit', { 'id': softwareType.id }) }}">EDIT</a>
+                		</td>
+            		</tr>
+        			{% endfor %}
+    			</table>
+			{% endif %}
+ 		</div>
     </div>
-
 {% endblock %}

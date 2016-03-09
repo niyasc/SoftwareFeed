@@ -1,6 +1,6 @@
 <?php
 
-namespace SoftwareWatchBundle\Repository;
+namespace SoftwareFeedBundle\Repository;
 
 /**
  * SoftwareTypeRepository

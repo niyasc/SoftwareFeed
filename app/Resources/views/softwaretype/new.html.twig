@@ -1,16 +1,29 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
-    <h1>SoftwareType creation</h1>
-
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Create" />
-    {{ form_end(form) }}
-
-    <ul>
-        <li>
-            <a href="{{ path('softwaretype_index') }}">Back to the list</a>
-        </li>
-    </ul>
+{% block main %}
+<h2>ADD SOFTWARE TYPE</h2>
+<hr>
+{{ form_start(form, {attr: {'class': 'well'}})}}
+	{% if form_errors(form.name) %}
+	<div class="alert alert-danger" role="alert">
+		{{ form_errors(form.name) }}
+	</div>
+	{% endif %}
+	<div class="form-group">
+		{{ form_label(form.name) }}
+		{{ form_widget(form.name) }}
+	</div>
+	<div class="form-group">
+		{{ form_label(form.description) }}
+		{{ form_widget(form.description) }}
+	</div>
+	<div class="form-group">
+		{{ form_label(form.parent) }}
+		{{ form_widget(form.parent) }}
+	</div>
+	<div class="form-group">
+		{{ form_widget(form.submit, {attr: {'class': 'btn btn-default btn-sm'}, label: 'SAVE'})}}
+		<a class="btn btn-default btn-sm" href="{{ path('softwaretype_index') }}">CANCEL</a>
+	</div>
+{{ form_end(form)}}
 {% endblock %}

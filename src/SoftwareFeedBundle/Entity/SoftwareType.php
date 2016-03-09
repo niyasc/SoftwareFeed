@@ -1,14 +1,15 @@
 <?php 
 
-namespace SoftwareWatchBundle\Entity;
+namespace SoftwareFeedBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection as ArrayCollection;
 
 /**
  * SoftwareType
  *
  * @ORM\Table(name="software_type")
- * @ORM\Entity(repositoryClass="SoftwareWatchBundle\Repository\SoftwareTypeRepository")
+ * @ORM\Entity(repositoryClass="SoftwareFeedBundle\Repository\SoftwareTypeRepository")
  */
 class SoftwareType {
     /**
@@ -35,11 +36,6 @@ class SoftwareType {
     private $description;
 
 
-    /**
-     * @ORM\OneToOne(targetEntity="SoftwareType")
-     * @ORM\JoinColumn(name="parent", referencedColumnName="id")
-     */
-    private $parent;
 
     /**
      * Get id
@@ -94,6 +90,12 @@ class SoftwareType {
         return $this->description;
     }
 
+    /**
+     * @ORM\ManyToOne(targetEntity="SoftwareType", inversedBy="subtypes")
+     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
+     */
+    private $parent;
+
     public function getParent() {
         return $this->parent;
     }
@@ -105,5 +107,23 @@ class SoftwareType {
 
     public function __toString() {
         return $this->name;
+    }
+
+    /**
+     * @ORM\OneToMany(targetEntity="SoftwareType", mappedBy="parent")
+     */
+    private $subtypes;
+	
+	public function getSubtypes() {
+		return $this -> subtypes;
+	}
+	
+	public function setSubtypes($subtypes) {
+		$this -> subtypes = $subtypes;
+		return $this;
+	}
+
+    public function __construct() {
+        $this->subtypes = new ArrayCollection();
     }
 }

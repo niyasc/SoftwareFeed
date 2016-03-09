@@ -1,6 +1,6 @@
 <?php
 
-namespace SoftwareWatchBundle\Tests\Controller;
+namespace SoftwareFeedBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 

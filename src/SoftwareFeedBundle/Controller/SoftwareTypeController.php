@@ -1,13 +1,13 @@
 <?php
 
-namespace SoftwareWatchBundle\Controller;
+namespace SoftwareFeedBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use SoftwareWatchBundle\Entity\SoftwareType;
-use SoftwareWatchBundle\Form\SoftwareTypeType;
+use SoftwareFeedBundle\Entity\SoftwareType;
+use SoftwareFeedBundle\Form\SoftwareTypeType;
 
 /**
  * SoftwareType controller.
@@ -26,7 +26,7 @@ class SoftwareTypeController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $softwareTypes = $em->getRepository('SoftwareWatchBundle:SoftwareType')->findAll();
+        $softwareTypes = $em->getRepository('SoftwareFeedBundle:SoftwareType')->findAll();
 
         return $this->render('softwaretype/index.html.twig', array(
             'softwareTypes' => $softwareTypes,
@@ -42,7 +42,7 @@ class SoftwareTypeController extends Controller
     public function newAction(Request $request)
     {
         $softwareType = new SoftwareType();
-        $form = $this->createForm('SoftwareWatchBundle\Form\SoftwareTypeType', $softwareType);
+        $form = $this->createForm('SoftwareFeedBundle\Form\SoftwareTypeType', $softwareType);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -84,7 +84,7 @@ class SoftwareTypeController extends Controller
     public function editAction(Request $request, SoftwareType $softwareType)
     {
         $deleteForm = $this->createDeleteForm($softwareType);
-        $editForm = $this->createForm('SoftwareWatchBundle\Form\SoftwareTypeType', $softwareType);
+        $editForm = $this->createForm('SoftwareFeedBundle\Form\SoftwareTypeType', $softwareType);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {

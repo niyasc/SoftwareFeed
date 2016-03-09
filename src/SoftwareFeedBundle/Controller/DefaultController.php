@@ -1,6 +1,6 @@
 <?php
 
-namespace SoftwareWatchBundle\Controller;
+namespace SoftwareFeedBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -12,6 +12,6 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-        return $this->render('SoftwareWatchBundle:Default:index.html.twig');
+        return $this->render('SoftwareFeedBundle:Default:index.html.twig');
     }
 }
