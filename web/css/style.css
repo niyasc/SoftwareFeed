@@ -1,13 +1,10 @@
 /*INCLUDE FONTS */
-@font-face {
-  font-family: Roboto;
-  src: url('../fonts/Roboto-Regular.ttf');
-}
+@import url(https://fonts.googleapis.com/css?family=Roboto);
+/*@font-face {*/
+/*  font-family: Roboto;*/
+/*  src: url('fonts/Roboto-Regular.ttf');*/
+/*}*/
 
-body {
-  font-family: 'Roboto', sans-serif;
-  background: #FAFAFA;
-}
 
 html,
 body {
@@ -18,7 +15,7 @@ body {
 
 
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: cursive, 'Roboto', sans-serif;
   background: #FAFAFA;
 }
 
@@ -209,6 +206,12 @@ blockquote {
 /*Comments*/
 .comment-message {
   margin-top: 10px;
+}
+
+/*Warning, Error messages*/
+.alert ul {
+    list-style-type: none !important;
+    padding-left: 0px !important;
 }
 
 /*Post thumb nail*/

@@ -4,12 +4,13 @@ namespace SoftwareFeedBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection as ArrayCollection;
-
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * SoftwareType
  *
  * @ORM\Table(name="software_type")
  * @ORM\Entity(repositoryClass="SoftwareFeedBundle\Repository\SoftwareTypeRepository")
+ * @UniqueEntity("name", message="Category already exists!!")
  */
 class SoftwareType {
     /**
@@ -125,5 +126,20 @@ class SoftwareType {
 
     public function __construct() {
         $this->subtypes = new ArrayCollection();
+    }
+    
+     /**
+     * @var string
+     * @ORM\Column(name="slug", type="string", length=255, nullable=false, unique=true)
+     */
+    private $slug;
+    
+    public function getSlug() {
+        return $this -> slug;
+    }
+    
+    public function setSlug($slug) {
+        $this -> slug = $slug;
+        return $this;
     }
 }

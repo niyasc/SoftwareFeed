@@ -8,6 +8,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SoftwareFeedBundle\Entity\SoftwareType;
 use SoftwareFeedBundle\Form\SoftwareTypeType;
+use Cocur\Slugify\Slugify;
+use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 
 /**
  * SoftwareType controller.
@@ -47,10 +49,36 @@ class SoftwareTypeController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->persist($softwareType);
-            $em->flush();
+            
+            //set slug
+            $slugify = new Slugify();
+            $softwareType -> setSlug($slugify -> slugify($softwareType -> getName()));
+            try {
+                echo "step1";
+                $em->persist($softwareType);
+                echo "step2";
+                $em->flush();
+                echo "step3";
+            }
+            catch(\PDOException $pdoe) {
+                echo "hi";
+                $form->addError(new FormError('This category already exists'));
+                 return $this->render('softwaretype/new.html.twig', array(
+                    'softwareType' => $softwareType,
+                    'form' => $form->createView(),
+                ));
+            }
+            catch(Exception $e) {
+                echo "hello";
+                $form->addError(new FormError('Unknown Exception'));
+                 return $this->render('softwaretype/new.html.twig', array(
+                    'softwareType' => $softwareType,
+                    'form' => $form->createView(),
+                ));
+            }
+            
 
-            return $this->redirectToRoute('softwaretype_show', array('id' => $softwareType->getId()));
+            return $this->redirectToRoute('softwaretype_show', array('slug' => $softwareType->getSlug()));
         }
 
         return $this->render('softwaretype/new.html.twig', array(
@@ -62,7 +90,7 @@ class SoftwareTypeController extends Controller
     /**
      * Finds and displays a SoftwareType entity.
      *
-     * @Route("/{id}", name="softwaretype_show")
+     * @Route("/{slug}", name="softwaretype_show")
      * @Method("GET")
      */
     public function showAction(SoftwareType $softwareType)
@@ -78,7 +106,7 @@ class SoftwareTypeController extends Controller
     /**
      * Displays a form to edit an existing SoftwareType entity.
      *
-     * @Route("/{id}/edit", name="softwaretype_edit")
+     * @Route("/{slug}/edit", name="softwaretype_edit")
      * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, SoftwareType $softwareType)
@@ -92,7 +120,7 @@ class SoftwareTypeController extends Controller
             $em->persist($softwareType);
             $em->flush();
 
-            return $this->redirectToRoute('softwaretype_edit', array('id' => $softwareType->getId()));
+            return $this->redirectToRoute('softwaretype_edit', array('slug' => $softwareType->getSlug()));
         }
 
         return $this->render('softwaretype/edit.html.twig', array(
@@ -105,7 +133,7 @@ class SoftwareTypeController extends Controller
     /**
      * Deletes a SoftwareType entity.
      *
-     * @Route("/{id}", name="softwaretype_delete")
+     * @Route("/{slug}", name="softwaretype_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, SoftwareType $softwareType)
@@ -132,7 +160,7 @@ class SoftwareTypeController extends Controller
     private function createDeleteForm(SoftwareType $softwareType)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('softwaretype_delete', array('id' => $softwareType->getId())))
+            ->setAction($this->generateUrl('softwaretype_delete', array('slug' => $softwareType->getSlug())))
             ->setMethod('DELETE')
             ->getForm()
         ;

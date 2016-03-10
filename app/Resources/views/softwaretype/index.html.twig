@@ -10,9 +10,9 @@
         {% for softwareType in softwareTypes %}
             <tr>
                 <td>{{loop.index}}</td>
-                <td class="text-left"><a class="btn" href="{{ path('softwaretype_show', { 'id': softwareType.id }) }}">{{ softwareType.name }}</a></td>
+                <td class="text-left"><a class="btn" href="{{ path('softwaretype_show', { 'slug': softwareType.slug }) }}">{{ softwareType.name }}</a></td>
                 <td class="text-left">
-                    <a class="btn btn-default btn-sm" href="{{ path('softwaretype_edit', { 'id': softwareType.id }) }}">EDIT</a>
+                    <a class="btn btn-default btn-sm" href="{{ path('softwaretype_edit', { 'slug': softwareType.slug }) }}">EDIT</a>
                 </td>
             </tr>
         {% endfor %}
