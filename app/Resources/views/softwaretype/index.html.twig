@@ -1,11 +1,15 @@
 {% extends 'base.html.twig' %}
-
+{%block subtitle%} SOFTWARE TYPES | {%endblock%}
 {% block main %}
-    <h2>Software Types</h2>
+	
+    <h2>SOFTWARE TYPES</h2>
     <hr>
-    <a class="btn btn-default btn-sm" href="{{ path('softwaretype_new') }}">ADD SOFTWARE TYPE</a>
+	{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+    	<a class="btn btn-default btn-sm" href="{{ path('softwaretype_new') }}">ADD SOFTWARE TYPE</a>
+	{% endif %}
     <div class="row">
     <div class="col-md-8 col-md-push-2">
+	{% if is_granted('IS_AUTHENTICATED_FULLY') %}
     <table class="table table-bordered table-striped">
         {% for softwareType in softwareTypes %}
             <tr>
@@ -17,6 +21,21 @@
             </tr>
         {% endfor %}
     </table>
+	{% else %}
+	<div class="row">
+	 	<tr>
+        {% for softwareType in softwareTypes %}
+            <div class="col-sm-4">
+                <a class="btn" href="{{ path('softwaretype_show', { 'slug': softwareType.slug }) }}">{{ softwareType.name }}</a>
+            </div>
+			{% if loop.index % 3 == 0 and loop.index < softwareTypes | length%}
+			</div>
+			<div class="col-sm-4">
+			{% endif %}
+        {% endfor %}
+		</div>
+	</div>
+	{% endif %}
     </div>
     </div>
 {% endblock %}
