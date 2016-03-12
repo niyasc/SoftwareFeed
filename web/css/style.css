@@ -115,18 +115,21 @@ nav li a:hover{
 .table-custom > tbody > tr > td{
   /*border: 0px;*/
 }
-.custom-btn {
+.btn-custom {
   background: #33363B;
   border: 0px;
   border-radius: 0px;
   margin: 5px;
+  color: white;
+  min-width: 100%;
 }
 
-.custom-btn:hover {
+.btn-custom:hover {
   background: black;
+  color: #eee;
 }
 
-table .custom-btn {
+table .btn-custom {
   margin-top: 0;
   margin-bottom: 0;
 }

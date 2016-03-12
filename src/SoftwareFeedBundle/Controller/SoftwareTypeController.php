@@ -38,7 +38,8 @@ class SoftwareTypeController extends Controller {
      * @Method({"GET", "POST"})
      */
     public function newAction(Request $request) {
-		$this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
+
+	$this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
 		
         $softwareType = new SoftwareType();
         $form = $this->createForm('SoftwareFeedBundle\Form\SoftwareTypeType', $softwareType);
@@ -77,7 +78,7 @@ class SoftwareTypeController extends Controller {
      * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, SoftwareType $softwareType) {
-		$this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
+	$this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
 		
         $deleteForm = $this->createDeleteForm($softwareType);
         $editForm = $this->createForm('SoftwareFeedBundle\Form\SoftwareTypeType', $softwareType);
@@ -100,6 +101,8 @@ class SoftwareTypeController extends Controller {
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, SoftwareType $softwareType) {
+    	$this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
+
         $form = $this->createDeleteForm($softwareType);
         $form->handleRequest($request);
 

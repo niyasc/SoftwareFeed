@@ -18,7 +18,7 @@
 --
 -- Table structure for table `app_users`
 --
-use SoftwareFeed;
+
 DROP TABLE IF EXISTS `app_users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -59,7 +59,7 @@ CREATE TABLE `software_type` (
   UNIQUE KEY `UNIQ_A9DB5DD5989D9B62` (`slug`),
   KEY `IDX_A9DB5DD5727ACA70` (`parent_id`),
   CONSTRAINT `FK_A9DB5DD5727ACA70` FOREIGN KEY (`parent_id`) REFERENCES `software_type` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -68,7 +68,7 @@ CREATE TABLE `software_type` (
 
 LOCK TABLES `software_type` WRITE;
 /*!40000 ALTER TABLE `software_type` DISABLE KEYS */;
-INSERT INTO `software_type` VALUES (1,NULL,'System Software','System Software is a computer software that is responsible for providing services for other application software packages. It act as an intermediate layer between user applications and computer hardware.','system-software'),(2,1,'Operating System','Operating System is a system software that act as an intermediate layer between computer hardware and application software packages. Operating System is responsible for performing resources management tasks such as process management, memory management, device management and file management.','operating-system'),(3,NULL,'Application Software','Application Software refers to computer software packages which performs some end user actions. Application software can be either general purpose or special purpose.','application-software');
+INSERT INTO `software_type` VALUES (1,NULL,'System Software','System Software is a computer software that is responsible for providing services for other application software packages. It act as an intermediate layer between user applications and computer hardware.','system-software'),(2,1,'Operating System','Operating System is a system software that act as an intermediate layer between computer hardware and application software packages. Operating System is responsible for performing resources management tasks such as process management, memory management, device management and file management.','operating-system'),(3,NULL,'Application Software','Application Software refers to computer software packages which performs some end user actions. Application software can be either general purpose or special purpose.','application-software'),(4,2,'Linux or GNU/Linux','The term Linux is often referred to the operating system GNU/Linux. GNU/Linux is a free and open source operating system. It includes GNU shell developed by Free Software Foundation and Linux kernel. There are hundreds of distributions based on GNU shell and Linux Kernel.','linux-or-gnu-linux'),(5,2,'Microsoft Windows Family','Windows is one of the most widely used proprietary operating system. Windows is a graphical user interface based operating system developed, sold and owned by Microsoft. Active Windows families include Windows NT, Windows Embedded and Windows Phone; these may encompass subfamilies, e.g. Windows Embedded Compact (Windows CE) or Windows Server.','microsoft-windows-family'),(6,2,'OS X','OS X (originally Mac OS X) is a series of Unix-based graphical interface operating systems (OS) developed and marketed by Apple Inc. It is designed to run on Macintosh computers, having been pre-installed on all Macs since 2002. OS X is the fourth most popular general purpose OS; within the market of desktop, laptop and home computers, and by web usage, OS X is the second most widely used desktop OS after Windows. - Wikipedia','os-x');
 /*!40000 ALTER TABLE `software_type` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -81,4 +81,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-03-11  1:15:00
+-- Dump completed on 2016-03-12 23:28:16

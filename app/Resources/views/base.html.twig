@@ -37,7 +37,7 @@
     </ul>
   </nav>
   {% endblock %}
-  {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+  {% if is_granted('ROLE_ADMIN') %}
   <div class="admin-panel">
     Hi, {{ app.user.username }}
     <a class="btn btn-sm btn-primary custom-btn" href="{{ path('logout', {'target_url': app.request.uri})  }}">Logout</a>
@@ -45,19 +45,19 @@
   {% endif %}
   <main>
     {% block main %}
-    <div class="container">
       <div class="row">
-        <div class="col-sm-8">
-          <div class="content">
-            {% block content %}
-            {% endblock %}
-          </div>
+        <div class="col-md-3">
+          Sidebar 1
         </div>
-        <div class="col-md-4">
-          Sidebar
+        <div class="col-md-6">
+          {% block content %}
+          {% endblock %}
+        </div>
+        <div class="col-md-3">
+          Sidebar 2
         </div>
       </div>
-    </div>
+
   {% endblock %} <!-- End of Main -->
 </main>
 

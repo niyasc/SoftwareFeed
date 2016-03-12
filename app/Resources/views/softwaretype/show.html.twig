@@ -1,48 +1,60 @@
 {% extends 'base.html.twig' %}
 
-{% block main %}
-    <h2>{{ softwareType.name | upper}}</h2>
-     <!-- TWIG MACRO -->
-    {% macro getparent1(node) %}
-    {% import _self as macros %}
-        {% if node %}
-            {% if node.parent %}
-                    {{ macros.getparent1(node.parent) }}
-            {% endif %}
-            <a href="{{ path('softwaretype_show', {'slug' : node.slug}) }}">{{node.name}}</a> &gt; 
+{% block content %}
+<h2>{{ softwareType.name | upper}}</h2>
+ <!-- TWIG MACRO -->
+{% macro getparent1(node) %}
+{% import _self as macros %}
+    {% if node %}
+        {% if node.parent %}
+                {{ macros.getparent1(node.parent) }}
         {% endif %}
-    {% endmacro %}
-    {% import _self as macros %}{{ macros.getparent1(softwareType.parent) }}
-    
-    <!-- MACRO END -->
-    <hr>
-    <a class="btn btn-default btn-sm" href="{{ path('softwaretype_index') }}">ALL CATEGORIES</a>
-    <a class="btn btn-default btn-sm" href="{{ path('softwaretype_edit', { 'slug': softwareType.slug }) }}">EDIT</a>
-    {{form_start(delete_form, {attr: {'style': 'display: inline', 'onsubmit': 'return confirm("Are You Sure?")'}})}}
-      <input class="btn btn-default btn-sm" type="submit" value="DELETE">
-    {{form_end(delete_form)}}
-    <hr>
+        <a href="{{ path('softwaretype_show', {'slug' : node.slug}) }}">{{node.name}}</a> &gt;
+    {% endif %}
+{% endmacro %}
+{% import _self as macros %}{{ macros.getparent1(softwareType.parent) }}
+
+<!-- MACRO END -->
+<hr>
+<a class="btn btn-default btn-sm" href="{{ path('softwaretype_index') }}">ALL CATEGORIES</a>
+{% if is_granted('ROLE_ADMIN') %}
+<a class="btn btn-default btn-sm" href="{{ path('softwaretype_edit', { 'slug': softwareType.slug }) }}">EDIT</a>
+{{form_start(delete_form, {attr: {'style': 'display: inline', 'onsubmit': 'return confirm("Are You Sure?")'}})}}
+  <input class="btn btn-default btn-sm" type="submit" value="DELETE">
+{{form_end(delete_form)}}
+{% endif %}
+<hr>
+<div class="alert alert-info">
+	{{ softwareType.description }}
+</div>
+{% if softwareType.subtypes | length > 0 %}
+	<h3>Categories under {{softwareType.name}}</h3>
+{% endif %}
+{% if is_granted('ROLE_ADMIN') %}
+<table class="table table-bordered">
+	{% for softwareType in softwareType.subtypes %}
+	<tr>
+		<td>{{loop.index}}</td>
+		<td class="text-left"><a class="btn" href="{{ path('softwaretype_show', { 'slug': softwareType.slug }) }}">{{ softwareType.name }}</a></td>
+		<td class="text-left">
+    		<a class="btn btn-default btn-sm" href="{{ path('softwaretype_edit', { 'slug': softwareType.slug }) }}">EDIT</a>
+		</td>
+	</tr>
+	{% endfor %}
+</table>
+{% else %}
     <div class="row">
-        <div class="col-md-8 col-md-push-2">
-			<div class="well">
-			
-            	<strong>{{ softwareType.description }}</strong>
-			</div>
-       
-			{% if softwareType.subtypes | length > 0 %}
-				<h3>Categories under {{softwareType.name}}</h3>
-		 		<table class="table table-bordered">
-        			{% for softwareType in softwareType.subtypes %}
-            		<tr>
-                		<td>{{loop.index}}</td>
-                		<td class="text-left"><a class="btn" href="{{ path('softwaretype_show', { 'slug': softwareType.slug }) }}">{{ softwareType.name }}</a></td>
-                		<td class="text-left">
-                    		<a class="btn btn-default btn-sm" href="{{ path('softwaretype_edit', { 'slug': softwareType.slug }) }}">EDIT</a>
-                		</td>
-            		</tr>
-        			{% endfor %}
-    			</table>
-			{% endif %}
- 		</div>
-    </div>
+    {% for softwareType in softwareType.subtypes %}
+        <div class="col-sm-4">
+            <a class="btn btn-custom" href="{{ path('softwaretype_show', { 'slug': softwareType.slug }) }}">
+                {{ softwareType.name }}
+            </a>
+        </div>
+        {% if loop.index % 3 == 0 and loop.index < softwareType.subtypes | length%}
+        </div>
+        <div class="row">
+        {% endif %}
+    {% endfor %}
+</div>
+{% endif %}
 {% endblock %}

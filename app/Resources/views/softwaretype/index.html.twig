@@ -1,41 +1,44 @@
 {% extends 'base.html.twig' %}
 {%block subtitle%} SOFTWARE TYPES | {%endblock%}
-{% block main %}
-	
+{% block content %}
+<div class="page-header">
     <h2>SOFTWARE TYPES</h2>
-    <hr>
-	{% if is_granted('IS_AUTHENTICATED_FULLY') %}
-    	<a class="btn btn-default btn-sm" href="{{ path('softwaretype_new') }}">ADD SOFTWARE TYPE</a>
-	{% endif %}
-    <div class="row">
-    <div class="col-md-8 col-md-push-2">
-	{% if is_granted('IS_AUTHENTICATED_FULLY') %}
-    <table class="table table-bordered table-striped">
-        {% for softwareType in softwareTypes %}
-            <tr>
-                <td>{{loop.index}}</td>
-                <td class="text-left"><a class="btn" href="{{ path('softwaretype_show', { 'slug': softwareType.slug }) }}">{{ softwareType.name }}</a></td>
-                <td class="text-left">
-                    <a class="btn btn-default btn-sm" href="{{ path('softwaretype_edit', { 'slug': softwareType.slug }) }}">EDIT</a>
-                </td>
-            </tr>
-        {% endfor %}
-    </table>
-	{% else %}
-	<div class="row">
-	 	<tr>
-        {% for softwareType in softwareTypes %}
-            <div class="col-sm-4">
-                <a class="btn" href="{{ path('softwaretype_show', { 'slug': softwareType.slug }) }}">{{ softwareType.name }}</a>
-            </div>
-			{% if loop.index % 3 == 0 and loop.index < softwareTypes | length%}
-			</div>
-			<div class="col-sm-4">
-			{% endif %}
-        {% endfor %}
-		</div>
-	</div>
-	{% endif %}
-    </div>
-    </div>
+</div>
+{% if is_granted('ROLE_ADMIN') %}
+    <a class="btn btn-default btn-sm" href="{{ path('softwaretype_new') }}">ADD SOFTWARE TYPE</a>
+{% endif %}
+
+{% if is_granted('ROLE_ADMIN') %}
+<table class="table table-bordered table-striped">
+    {% for softwareType in softwareTypes %}
+    <tr>
+        <td>{{loop.index}}</td>
+        <td class="text-left">
+          <a class="btn" href="{{ path('softwaretype_show', { 'slug': softwareType.slug }) }}">
+            {{ softwareType.name }}
+          </a>
+        </td>
+        <td class="text-left">
+            <a class="btn btn-default btn-sm" href="{{ path('softwaretype_edit', { 'slug': softwareType.slug }) }}">
+                EDIT
+            </a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<div class="row text-left">
+    {% for softwareType in softwareTypes %}
+        <div class="col-sm-4">
+            <a class="btn btn-custom" href="{{ path('softwaretype_show', { 'slug': softwareType.slug }) }}">
+                {{ softwareType.name }}
+            </a>
+        </div>
+        {% if loop.index % 3 == 0 and loop.index < softwareTypes | length%}
+        </div>
+        <div class="row text-left">
+        {% endif %}
+    {% endfor %}
+</div>
+{% endif %}
 {% endblock %}
