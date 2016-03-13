@@ -124,8 +124,23 @@ class SoftwareType {
 		return $this;
 	}
 
+	/**
+	* @ORM\OneToMany(targetEntity="Software", mappedBy="softwareType")
+	*/
+	private $softwarePackages;
+
+	private function getSoftwarePackages() {
+		return $this -> softwarePackages;
+	}
+
+	private function setSoftwarePackages($softwarePackages) {
+		$this -> softwarePackages = $softwarePackages;
+		return $this;
+	}
+
     public function __construct() {
         $this->subtypes = new ArrayCollection();
+        $this->softwarePackages = new ArrayCollection();
     }
     
      /**

@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+{% block subtitle %}
+ADD SOFTWARE |
+{% endblock %}
+{% block content %}
+    <div class="page-header">
+      <h2>ADD SOFTWARE</h2>
+    </div>
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <input type="submit" value="Create" />
+    {{ form_end(form) }}
+
+    <ul>
+        <li>
+            <a href="{{ path('software_index') }}">Back to the list</a>
+        </li>
+    </ul>
+{% endblock %}

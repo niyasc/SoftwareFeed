@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+{% block subtitle %} {{ software.name | upper }} | {% endblock %}
+{% block content %}
+<div class="page-header">
+	<h2>{{ software.name | upper }}</h2>
+</div>
+<div class="row">
+	<div class="col-sm-3">
+		<a class="thumbnail" href="/uploads/logos/{{ software.logo }}">
+			<img src="/uploads/logos/{{ software.logo }}"/>
+		</a>
+	</div>
+	<div class="col-sm-9">
+		<table>
+			<tbody>
+			    <tr>
+			        <th>Software Type</th>
+			        <td>{{ software.softwareType }}</td>
+			    </tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+<div class="well">
+	{{ software.description }}
+</div>
+<ul>
+    <li>
+        <a href="{{ path('software_index') }}">Back to the list</a>
+    </li>
+    <li>
+        <a href="{{ path('software_edit', { 'slug': software.slug }) }}">Edit</a>
+    </li>
+    <li>
+        {{ form_start(delete_form) }}
+            <input type="submit" value="Delete">
+        {{ form_end(delete_form) }}
+    </li>
+</ul>
+{% endblock %}

@@ -1,7 +1,0 @@
-
-
-    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-
-{% else %}
-
-{% endif %}
