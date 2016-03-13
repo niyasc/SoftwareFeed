@@ -4,43 +4,21 @@
     <div class="page-header">
       <h2>SOFTWARE PACKAGES</h2>
     </div>
-    <table>
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Slug</th>
-                <th>Description</th>
-                <th>Logo</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
+<a class="btn btn-default btn-sm" href="{{ path('software_new') }}">ADD SOFTWARE</a>
+<hr>
+    <table class="table table-bordered">
         {% for software in softwares %}
             <tr>
-                <td><a href="{{ path('software_show', { 'slug': software.slug }) }}">{{ software.id }}</a></td>
-                <td>{{ software.name }}</td>
-                <td>{{ software.slug }}</td>
-                <td>{{ software.description }}</td>
-                <td>{{ software.logo }}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('software_show', { 'slug': software.slug }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('software_edit', { 'id': software.id }) }}">edit</a>
-                        </li>
-                    </ul>
+                <td>{{ loop.index }}</a></td>
+                <td class="text-left"><a href="{{ path('software_show', { 'slug': software.slug }) }}">{{ software.name }}</a></td>
+                <td class="text-left">
+                            <a class="btn btn-default btn-sm" href="{{ path('software_edit', { 'slug': software.slug }) }}">EDIT</a>
                 </td>
             </tr>
         {% endfor %}
-        </tbody>
     </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('software_new') }}">Create a new entry</a>
-        </li>
-    </ul>
+
+
+
 {% endblock %}

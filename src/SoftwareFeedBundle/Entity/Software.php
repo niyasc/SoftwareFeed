@@ -3,12 +3,14 @@
 namespace SoftwareFeedBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Software
  *
  * @ORM\Table(name="software")
  * @ORM\Entity(repositoryClass="SoftwareFeedBundle\Repository\SoftwareRepository")
+ * @UniqueEntity("name", message="Software already exists!!")
  */
 class Software
 {
@@ -216,6 +218,10 @@ class Software
 	public function setChildren($children) {
 		$this -> children = $children;
 		return $this;
+	}
+
+	public function __toString() {
+		return $this -> name;
 	}
 }
 

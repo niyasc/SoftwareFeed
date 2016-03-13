@@ -6,6 +6,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Doctrine\MongoDB\GridFSFile;
 
 class SoftwareType extends AbstractType
 {
@@ -15,13 +17,17 @@ class SoftwareType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('name')
+	$builder
+	    ->add('name')
             ->add('description')
             ->add('logo', FileType::class, array(
-            	'label' => 'Logo'
+            	'label' => 'Logo',
+            	'data_class' => null
             ))
-            ->add('softwareType')
+            ->add('softwareType', EntityType::class, array(
+            	'class' => 'SoftwareFeedBundle:SoftwareType',
+            	'required' => TRUE
+            ))
             ->add('parents')
         ;
     }

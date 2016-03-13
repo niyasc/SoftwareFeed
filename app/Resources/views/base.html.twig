@@ -5,13 +5,13 @@
   <title>
     {% block title %}
     {%block subtitle %}{%endblock%}
-    SoftwareFeed - Keep your eyes on software releases
+    OpenSourceFeed - Stories of Free/Open Source technologies
     {% endblock %}
   </title>
 
   {% block stylesheets %}
   <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}" />
-  <link rel="stylesheet" href="{{ asset('css/bootstrap-theme.min.css') }}" />
+  <!--<link rel="stylesheet" href="{{ asset('css/bootstrap-theme.min.css') }}" />-->
   <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
   {% endblock %}
   <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
@@ -21,10 +21,10 @@
   {% block header %}
   <header>
     <a href="{{ path('homepage') }}">
-      <h1>SoftwareFeed</h1>
+      <h1>OpenSourceFeed</h1>
     </a>
     <p>
-      Keep your eyes on software releases
+      Stories of Free/Open Source technologies
     </p>
   </header>
   <div id="menu-btn">
@@ -69,7 +69,7 @@
 
 {% block footer %}
 <footer>
-  &copy; SoftwareFeeder 2016
+  &copy; OpenSourceFeeder 2016
 </footer>
 {% endblock %}
 {% endblock %}

@@ -68,7 +68,7 @@ class SoftwareController extends Controller
             $em->persist($software);
             $em->flush();
 
-            return $this->redirectToRoute('software_show', array('id' => $software->getId()));
+            return $this->redirectToRoute('software_show', array('slug' => $software->getSlug()));
         }
 
         return $this->render('software/new.html.twig', array(
@@ -106,11 +106,25 @@ class SoftwareController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+
+        	$file = $software->getLogo();
+
+            // Generate a unique name for the file before saving it
+            $fileName = md5(uniqid()).'.'.$file->guessExtension();
+
+            // Move the file to the directory where logos are stored
+            $logoDir = $this->container->getParameter('kernel.root_dir').'/../web/uploads/logos';
+            $file->move($logoDir, $fileName);
+
+            // Update the 'logo' property to store the PDF file name
+            // instead of its contents
+            $software->setLogo($fileName);
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($software);
             $em->flush();
 
-            return $this->redirectToRoute('software_edit', array('slug' => $software->getId()));
+            return $this->redirectToRoute('software_show', array('slug' => $software->getSlug()));
         }
 
         return $this->render('software/edit.html.twig', array(
