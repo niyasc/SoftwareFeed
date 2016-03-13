@@ -42,6 +42,65 @@ INSERT INTO `app_users` VALUES (1,'admin','$2a$08$jHZj/wJfcVKlIwr5AvR78euJxYK7Ku
 UNLOCK TABLES;
 
 --
+-- Table structure for table `software`
+--
+
+DROP TABLE IF EXISTS `software`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `software` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `type_id` int(11) DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `slug` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `description` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `logo` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `UNIQ_77D068CF5E237E06` (`name`),
+  UNIQUE KEY `UNIQ_77D068CF989D9B62` (`slug`),
+  KEY `IDX_77D068CFC54C8C93` (`type_id`),
+  CONSTRAINT `FK_77D068CFC54C8C93` FOREIGN KEY (`type_id`) REFERENCES `software_type` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `software`
+--
+
+LOCK TABLES `software` WRITE;
+/*!40000 ALTER TABLE `software` DISABLE KEYS */;
+INSERT INTO `software` VALUES (1,4,'Fedora','fedora','Fedora, formerly Fedora Core is an independently evolved GNU/Linux distribution sponsored by Red Hat, an open source giant. Fedora make use of RPM for package management. Fedora is often referred as a testing platform for Red Hat Enterprise Linux.','0a5f537bfb22ff52e6454de5867dfef2.svg');
+/*!40000 ALTER TABLE `software` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `software_children`
+--
+
+DROP TABLE IF EXISTS `software_children`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `software_children` (
+  `child_id` int(11) NOT NULL,
+  `parent_id` int(11) NOT NULL,
+  PRIMARY KEY (`child_id`,`parent_id`),
+  KEY `IDX_56C3BD71DD62C21B` (`child_id`),
+  KEY `IDX_56C3BD71727ACA70` (`parent_id`),
+  CONSTRAINT `FK_56C3BD71727ACA70` FOREIGN KEY (`parent_id`) REFERENCES `software` (`id`),
+  CONSTRAINT `FK_56C3BD71DD62C21B` FOREIGN KEY (`child_id`) REFERENCES `software` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `software_children`
+--
+
+LOCK TABLES `software_children` WRITE;
+/*!40000 ALTER TABLE `software_children` DISABLE KEYS */;
+/*!40000 ALTER TABLE `software_children` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `software_type`
 --
 
@@ -81,4 +140,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-03-12 23:28:16
+-- Dump completed on 2016-03-13 16:26:22
