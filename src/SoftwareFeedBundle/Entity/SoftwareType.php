@@ -129,11 +129,11 @@ class SoftwareType {
 	*/
 	private $softwarePackages;
 
-	private function getSoftwarePackages() {
+	public function getSoftwarePackages() {
 		return $this -> softwarePackages;
 	}
 
-	private function setSoftwarePackages($softwarePackages) {
+	public function setSoftwarePackages($softwarePackages) {
 		$this -> softwarePackages = $softwarePackages;
 		return $this;
 	}

@@ -35,9 +35,32 @@
 	{% for softwareType in softwareType.subtypes %}
 	<tr>
 		<td>{{loop.index}}</td>
-		<td class="text-left"><a class="btn" href="{{ path('softwaretype_show', { 'slug': softwareType.slug }) }}">{{ softwareType.name }}</a></td>
 		<td class="text-left">
-    		<a class="btn btn-default btn-sm" href="{{ path('softwaretype_edit', { 'slug': softwareType.slug }) }}">EDIT</a>
+		    <a class="btn" href="{{ path('softwaretype_show', { 'slug': softwareType.slug }) }}">
+		        {{ softwareType.name }}
+		    </a>
+		</td>
+		<td class="text-left">
+    		<a class="btn btn-default btn-sm" href="{{ path('softwaretype_edit', { 'slug': softwareType.slug }) }}">
+    		    EDIT
+    		</a>
+		</td>
+	</tr>
+	{% endfor %}
+</table>
+<table class="table table-bordered">
+    {% for software in softwareType.softwarePackages %}
+	<tr>
+	    <td>{{loop.index}}</td>
+	    <td class="text-left">
+		    <a class="btn" href="{{ path('software_show', { 'slug': software.slug }) }}">
+		        {{ software.name }}
+		    </a>
+		</td>
+		<td class="text-left">
+    		<a class="btn btn-default btn-sm" href="{{ path('software_edit', { 'slug': software.slug }) }}">
+    		    EDIT
+    		</a>
 		</td>
 	</tr>
 	{% endfor %}
